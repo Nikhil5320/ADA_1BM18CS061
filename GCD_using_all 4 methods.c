@@ -51,6 +51,7 @@ int repitative_subraction_rec(int m,int n)
 int consicutive_integer(int m,int n,int small)
 {
  while(1)
+ {
  if(m%small==0 && n%small==0)
   return small;
  else
@@ -58,6 +59,7 @@ int consicutive_integer(int m,int n,int small)
   small=small-1;
   m=m%small;
   n=n%small; 
+ }
  }
 }
 
