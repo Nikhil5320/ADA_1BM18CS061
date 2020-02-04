@@ -1,3 +1,5 @@
+
+
 #include <stdio.h>
 
 int euclid(int m,int n)
@@ -87,7 +89,7 @@ int middle_school(int a,int b)
    }
    if(n==1 && m==1)
     ans=ans*i;
-   if(n==0 || m==0)
+   if(n==1 || m==1)
     i=i-1;
   }
  return ans;
@@ -132,3 +134,7 @@ void main()
           break;
  }
 }
+
+
+  
+ 
