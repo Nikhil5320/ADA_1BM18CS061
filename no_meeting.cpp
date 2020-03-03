@@ -5,23 +5,24 @@ using namespace std;
 int insert_sort(int a[],int n)
 {
 	int temp,count=1;
-	for(int i=3;i<2*n;i=i+2)
+	for(int i=2;i<2*n;i=i+2)
 	{
-	 for(int j=1;j<i;j=j+2)
+	 for(int j=0;j<i;j=j+2)
 	 {
 	  if(a[i]<a[j])
 	  {
 	   temp=a[i];
 	   a[i]=a[j];
 	   a[j]=temp;
-	   temp=a[i-1];
-	   a[i-1]=a[j-1];
-	   a[j-1]=temp;
+	   temp=a[i+1];
+	   a[i+1]=a[j+1];
+	   a[j+1]=temp;
  	  }
 	 }
 	}
+
        cout<<"The meeting "<<a[0] <<"-"<< a[1]<<" is allocated"<<endl;
-       for(int i=1;i<2*n;i=i+2)
+       for(int i=1;i<(2*n)-2;i=i+2)
        {
 	if(a[i]<=a[i+1])
 	{
