@@ -2,9 +2,9 @@
 
 using namespace std;
 
-int insert_sort(int a[],int n)
+int no_meetings(int a[],int n)
 {
-	int temp,count=1;
+	int temp,count=1,j=n+1;
 	for(int i=2;i<2*n;i=i+2)
 	{
 	 for(int j=0;j<i;j=j+2)
@@ -20,22 +20,28 @@ int insert_sort(int a[],int n)
  	  }
 	 }
 	}
-
+	for(int i=0;i<2*n;i++)
+	 cout<<a[i]<<" ";
+    cout<<endl;
        cout<<"The meeting "<<a[0] <<"-"<< a[1]<<" is allocated"<<endl;
-       for(int i=1;i<(2*n)-2;i=i+2)
+       for(int i=1;i<(2*n)-2;i=j+1)
        {
-	if(a[i]<=a[i+1])
-	{
-	 cout<<"The meeting "<<a[i+1] <<"-"<< a[i+2]<<" is allocated"<<endl;
-         count++;
+        for(j=i+1;j<(2*n)-1;j=j+2)
+        {
+            if(a[i]<=a[j])
+            {
+                cout<<"The meeting "<<a[j] <<"-"<< a[j+1]<<" is allocated"<<endl;
+                count++;
+                break;
+            }
         }
        }
       cout<<"Therefore total number of meetings possible = "<<count<<endl;
+      return 0;
 
-	 
 }
-	   
- 	 
+
+
 
 int main()
 {
@@ -45,6 +51,6 @@ int main()
 	cout<<"Enter the starting and ending time of all the meetings"<<endl;
 	for(int i=0;i<2*n;i++)
 	 cin>>a[i];
-	insert_sort(a,n);
+	no_meetings(a,n);
 	return 0;
 }
