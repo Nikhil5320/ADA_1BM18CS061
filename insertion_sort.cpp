@@ -2,7 +2,8 @@
 #include <time.h>
 using namespace std;
 
-insert_sort(int a[],int n);
+insert_sort(int a[],int n)
+{
 int i, key, j;  
     for (i = 1; i < n; i++) 
     {  
@@ -15,6 +16,7 @@ int i, key, j;
         }  
         arr[j + 1] = key;  
     }  
+}
 
 int main()
 {
