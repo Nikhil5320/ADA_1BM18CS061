@@ -1,0 +1,93 @@
+/*5. a) Write program to do the following:
+i) Print all the nodes reachable from a given starting node in a digraph using BFS method.
+ii) Check whether a given graph is connected or not using DFS method.*/
+
+
+
+#include <iostream>
+
+using namespace std;
+int a[20][20], q[20], visited[20],reached[20],n, i, j,count=0, f = 0, r = -1;
+
+void bfs(int v)
+{
+    for(j=1;j<=n;j++)
+        if(a[v][j] && !visited[j])
+            q[++r]=j;
+    if(f<=r)
+    {
+        visited[q[f]]=1;
+        bfs(q[f++]);
+    }
+}
+
+void dfs(int v)
+{
+    reached[v]=1;
+    for(j=1;j<=n;j++)
+    {
+        if(a[v][j] && !reached[j])
+        {
+            cout<<v<<"->"<<j<<endl;
+            count++;
+            dfs(j);
+        }
+    }
+
+}
+
+int main() {
+ int v,choice=0,flag=0;
+ cout<<"Enter the number of vertices : "<<endl;
+ cin>>n;
+
+ cout<<"Enter graph data in matrix form : "<<endl;
+ for(i=1; i<=n; i++)
+  for(j=1;j<=n;j++)
+   cin>>a[i][j];
+
+
+
+ while(1)
+ {
+     cout<<"Select your choice : \n1.BFS\n2.DFS\n3.EXIT"<<endl;
+     cin>>choice;
+     switch(choice)
+     {
+         case 1 : for(i=1; i <= n; i++)
+                  {
+                   q[i] = 0;
+                   visited[i] = 0;
+                  }
+                 cout<<" Enter the starting vertex :"<<endl;
+                  cin>>v;
+                  bfs(v);
+                  if(v<1 || v>n)
+                  {
+                      cout<<"BFS is not possible"<<endl;
+                  }
+                  else
+                  {
+                   cout<<" The node which are reachable are :"<<endl;
+                   for(i=1; i <= n; i++)
+                   {
+                    if(visited[i])
+                      cout<<i<<" ";
+                   }
+                  }
+                  for(i=1;i<=n;i++)
+                      if(visited[i])
+                        flag=1;
+                  if(flag==0)
+                    cout<<"From "<<v<<"no vertex can be reached"<<endl;
+                    break;
+         case 2 : for(i=1;i<=n;i++)
+                   reached[i]=0;
+                  dfs(1);
+                  break;
+         case 3 : return 0;
+     }
+
+}
+}
+
