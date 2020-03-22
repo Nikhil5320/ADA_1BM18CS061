@@ -7,7 +7,7 @@ ii) Check whether a given graph is connected or not using DFS method.*/
 #include <iostream>
 
 using namespace std;
-int a[20][20], q[20], visited[20],reached[20],n, i, j,count=0, f = 0, r = -1;
+int a[20][20], q[20], visited[20],reached[20],n, i, j,count=0, f = 0, r = -1,bulb=0;
 
 void bfs(int v)
 {
@@ -36,6 +36,22 @@ void dfs(int v)
 
 }
 
+void dfs_loop(int v)
+{
+    reached[v]=1;
+    for(j=1;j<=n;j++)
+    {
+        if(a[v][j] && reached[j])
+        {
+            bulb=0;
+            break;
+        }
+        if(a[v][j] && !reached[j])
+          dfs(j);
+    }
+
+}
+
 int main() {
  int v,choice=0,flag=0;
  cout<<"Enter the number of vertices : "<<endl;
@@ -50,7 +66,7 @@ int main() {
 
  while(1)
  {
-     cout<<"Select your choice : \n1.BFS\n2.DFS\n3.EXIT"<<endl;
+     cout<<"Select your choice : \n1.BFS\n2.DFS\n3.Check the presence of loop(DFS)\n4.EXIT"<<endl;
      cin>>choice;
      switch(choice)
      {
@@ -85,9 +101,16 @@ int main() {
                    reached[i]=0;
                   dfs(1);
                   break;
-         case 3 : return 0;
+         case 3 : for(i=1;i<=n;i++)
+                   reached[i]=0;
+                  dfs_loop(1);
+                  if(bulb == 1)
+                   cout<<"There exist a loop in the given graph"<<endl;
+                  else
+                   cout<<"There exist no loop in the given graph"<<endl;
+                  break;        
+         case 4 : return 0;
      }
 
 }
 }
-
