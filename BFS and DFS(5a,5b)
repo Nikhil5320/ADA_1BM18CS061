@@ -47,7 +47,7 @@ void dfs_loop(int v)
             break;
         }
         if(a[v][j] && !reached[j])
-          dfs(j);
+          dfs_loop(j);
     }
 
 }
