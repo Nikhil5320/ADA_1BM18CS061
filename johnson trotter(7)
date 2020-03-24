@@ -1,72 +1,80 @@
-#include <stdio.h>
-#include <conio.h>
+#include<iostream>
+using namespace std;
 
-int NN, i, count=0;
-int p[100], pi[100];      
-int dir[100];             
-
-void PrintPerm()
+int pos_of_mobile(int a[],int n,int m)
 {
-   int i;
-   
-   count = count + 1;
-   printf( "[%8d] ", count );
-   
-   for (i=1; i <= NN; ++i)
-      printf( "%d", p[i] );
-} 
-
-
-
-void PrintTrans( int x, int y )
-{
-   printf( " (%d %d)", x, y );
-   printf( "\n" );
-} 
-
-
-
-void Move( int x, int d )
-{
-   int z;
-   PrintTrans( pi[x], pi[x]+d );
-   z = p[pi[x]+d];
-   p[pi[x]] = z;
-   p[pi[x]+d] = x;
-   pi[z] = pi[x];
-   pi[x] = pi[x]+d;
+	for(int i=1;i<=n;i++)
+	{
+		if(a[i]==m)
+			return i;
+	}
 }
 
-
-
-void Perm ( int n )
+int find_mobile(int a[],int dir[],int n)
 {
-   int i;
-   if (n > NN)
-      PrintPerm();
-   else
-   {
-      Perm( n+1 );
-      for (i=1; i<=n-1; ++i)
+    int m=0;
+    for(int i=1;i<=n;i++)
+    {
+      if(i!=n && dir[a[i]]==1 && a[i+1]<a[i])
       {
-         Move( n, dir[n] );
-         Perm( n+1 );
+          if(a[i]>m)
+            m=a[i];
       }
-      dir[n] = -dir[n];
-   } 
-} 
+      if(i!=1 && dir[a[i]]==0 && a[i-1]<a[i])
+      {
+          if(a[i]>m)
+            m=a[i];
+      }
+    }
+    return m;
+}
 
-void main ()
+int permut(int a[],int dir[],int n)
 {
-   printf( "Enter n: " );
-   scanf( "%d", &NN );
-   printf( "\n" );
-   for (i=1; i<=NN; ++i)
-   {
-      dir[i] = -1; p[i] = i;
-      pi[i] = i;
-   }
-   Perm ( 1 );
-   printf( "\n" );
-   getch();
+    int m=find_mobile(a,dir,n);
+    int pos=pos_of_mobile(a,n,m);
+    if(dir[m]==0 && a[pos-1]<m)
+      swap(a[pos],a[pos-1]);
+    else
+      swap(a[pos],a[pos+1]);
+    for(int i=1;i<=n;i++)
+      cout<<a[i]<<"\t";
+    cout<<endl;
+    for(int i=1;i<=n;i++)
+	{
+		if(a[i]>m)
+		{
+			if(dir[a[i]]==0)
+				dir[a[i]]=1;
+			else
+				dir[a[i]]=0;
+		}
+	}
+}
+
+int fact(int n)
+{
+    if(n==1)
+     return 1;
+    else
+     return n*fact(n-1);
+}
+
+int main()
+{
+	int n;
+	cout<<"Enter n value"<<endl;
+	cin>>n;
+	cout<<"Possible permutations of "<<n<<" are :"<<endl;
+	int dir[n],a[n];
+	for(int i=1;i<=n;i++)
+	{
+		dir[i]=0;
+		a[i]=i;
+		cout<<a[i]<<"\t";
+	}
+	cout<<"\n";
+	for(int i=1;i<fact(n);i++)
+		permut(a,dir,n);
+	return 0;
 }
