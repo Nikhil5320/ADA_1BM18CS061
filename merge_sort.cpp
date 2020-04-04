@@ -1,4 +1,5 @@
 #include<iostream>
+#include<time.h>
 using namespace  std;
 
 void combine(int a[],int low,int mid,int high)
@@ -49,15 +50,20 @@ void split(int a[],int low,int high)
 
 int main() 
 { 
+   clock_t start,end;
    int a[20],n,i;
    cout<<"Enter size\n";
    cin>>n;
    cout<<"Enter array elements\n";
    for(i=0;i<n;i++)
     cin>>a[i];
+   start=clock();
    split(a,0,n-1); 
+   end=clock();
    cout<<"\nSorted array is \n"; 
    for(i=0;i<n;i++)
      cout<<a[i]<<" ";
+   cout<<"\nTime taken ="<<(double)(end-start)/CLOCKS_PER_SEC;
     return 0; 
 }
+
