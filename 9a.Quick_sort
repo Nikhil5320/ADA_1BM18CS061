@@ -1,0 +1,58 @@
+#include<iostream>
+#include<time.h>
+using namespace  std;
+
+int pivot(int a[],int low,int high)
+{
+    int i=low+1,j=high;
+    int p=a[low],temp;
+    while(1)
+    {
+        while(i<=high && a[i]<=p){i++;}
+        while(j>=low && a[j]>p){j--;}
+        if(i<j)
+        {
+            temp=a[i];
+            a[i]=a[j];
+            a[j]=temp;
+        }
+        else
+        {
+            a[low]=a[j];
+            a[j]=p;
+            return j;
+        }
+    }
+}
+
+void quick(int a[],int low,int high)
+{
+    int p;
+    if(low<high)
+    {
+        p=pivot(a,low,high);
+        quick(a,low,p-1);
+        quick(a,p+1,high);
+        
+    }
+   
+}
+
+int main() 
+{ 
+   clock_t start,end;
+   int a[20],n,i;
+   cout<<"Enter size\n";
+   cin>>n;
+   cout<<"Enter array elements\n";
+   for(i=0;i<n;i++)
+    cin>>a[i];
+   start=clock();
+   quick(a,0,n-1); 
+   end=clock();
+   cout<<"\nSorted array is \n"; 
+   for(i=0;i<n;i++)
+     cout<<a[i]<<" ";
+   cout<<"\nTime taken ="<<(double)(end-start)/CLOCKS_PER_SEC;
+    return 0; 
+}
