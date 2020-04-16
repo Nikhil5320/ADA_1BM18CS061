@@ -3,7 +3,7 @@ using namespace std;
 
 int count=0;
 
-void tow_h(int n,char S,char A,char D)
+void tow_h(int n,char S,char D,char A)
 {
  if (n == 1)  
     {  
@@ -25,8 +25,3 @@ int main()
  tow_h(n,'A','C','B');
  cout<<count;
 }
-
-
- 
- 
- 
