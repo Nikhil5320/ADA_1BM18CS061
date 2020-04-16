@@ -5,13 +5,16 @@ int count=0;
 
 void tow_h(int n,char S,char A,char D)
 {
- if(n>0)
- {
-  tow_h(n-1,S,D,A);
-  cout<<"Disc moveds from "<<S<<" to "<<D<<endl;
-  tow_h(n-1,D,A,S);
-  count++;
- }
+ if (n == 1)  
+    {  
+        cout << "Move disk 1 from  " << S<<  
+                            " to " << D<<endl;  
+        return;  
+    }  
+    tow_h(n - 1, S, A, D);  
+    cout << "Move disk " << n << " from " << S << 
+                                " to " << D<< endl;  
+    tow_h(n - 1, A, D, S);  
 }
  
 int main()
